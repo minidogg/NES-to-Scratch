@@ -5,18 +5,20 @@ const scratch = require("./scratch.js");
 const util = require("./util.js");
 
 util.genFolder("../dist", true);
+util.genFolder("../dist/project", true);
+const projectDist = path.resolve("../dist/project")
 
 var project = new scratch.project(); //make a project
 
 var costume1 = new scratch.costume(fs.readFileSync("../costumes/backdrop.svg")) ///make backdrop costume
-costume1.save(path.resolve("../dist")) //save the costume
+costume1.save(path.resolve(projectDist)) //save the costume
 var stage = new scratch.target({isStage:true,name:"Stage"}) //make a sprite that is the stage
 stage.json.costumes.push(costume1.json) //add the costume to the sprite
 project.json.targets.push(stage.json) //add the stage to the project
 let abc = project.addBroadcast("abc") //add broadcast
 
 var costume2 = new scratch.costume(fs.readFileSync("../costumes/cat.svg")) //make a costume
-costume2.save(path.resolve("../dist")) //save the costume
+costume2.save(path.resolve(projectDist)) //save the costume
 var sprite1 = new scratch.target({isStage:false,name:"Jim"}) //create a sprite named "Jim"
 
 //creates a chain of blocks
@@ -62,7 +64,7 @@ project.json.targets.push(sprite1.json) //adds sprite to project
 
 
 //Writes project.json to the dist folder
-fs.writeFileSync("../dist/project.json",JSON.stringify(project.json),"utf-8")
+fs.writeFileSync(path.join(projectDist,"/project.json"),JSON.stringify(project.json),"utf-8")
 
 
 //finally commit archive
@@ -83,4 +85,4 @@ function zipDirectory(sourceDir, outPath) {
       archive.finalize();
     });
   }
-  zipDirectory(path.resolve("../dist"),path.resolve("../project.sb3"))
+  zipDirectory(projectDist,path.resolve("../dist/project.sb3"))

@@ -21,6 +21,12 @@ const genBlockId = ()=>{
     return blockId.toString()
 }
 
+let broadcatsId = 0
+const genBroadcatsId = ()=>{
+    broadcatsId++
+    return broadcatsId.toString()
+}
+
 class project{
     constructor(options={}){
 
@@ -29,6 +35,11 @@ class project{
             "vm": "2.3.0",
             "agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0"
         }}
+    }
+    addBroadcast(name){
+        let id = genBroadcatsId()
+        this.json.targets.find(e=>e.isStage==true).broadcasts[id] = name
+        return id
     }
 }
 
@@ -72,6 +83,7 @@ class target{
             })
         }
     }
+
 }
 
 class costume{

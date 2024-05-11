@@ -1,7 +1,7 @@
 //other stuffs
-const path = require("path")
-const fs = require('fs')
-const scratch = require("./scratch.js")
+const path = require("path");
+const fs = require('fs');
+const scratch = require("./scratch.js");
 
 if(fs.existsSync("../dist"))fs.rmSync("../dist",{recursive:true})
 fs.mkdirSync("../dist")

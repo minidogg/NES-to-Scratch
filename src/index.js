@@ -16,6 +16,7 @@ costume1.save(path.resolve("../dist"))
 
 var costume2 = new scratch.costume(fs.readFileSync("../costumes/cat.svg"))
 var sprite1 = new scratch.target({isStage:false,name:"Jim"})
+sprite1.json.size = 1000
 sprite1.json.costumes.push(costume2.json)
 project.json.targets.push(sprite1.json)
 costume2.save(path.resolve("../dist"))

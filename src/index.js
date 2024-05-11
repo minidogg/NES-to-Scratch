@@ -6,36 +6,62 @@ const scratch = require("./scratch.js");
 if(fs.existsSync("../dist"))fs.rmSync("../dist",{recursive:true})
 fs.mkdirSync("../dist")
 
-var project = new scratch.project()
+var project = new scratch.project() //make a project
 
-var costume1 = new scratch.costume(fs.readFileSync("../costumes/backdrop.svg"))
-var backdrop = new scratch.target({isStage:true,name:"Stage"})
-backdrop.json.costumes.push(costume1.json)
-project.json.targets.push(backdrop.json)
-costume1.save(path.resolve("../dist"))
+var costume1 = new scratch.costume(fs.readFileSync("../costumes/backdrop.svg")) ///make backdrop costume
+costume1.save(path.resolve("../dist")) //save the costume
+var stage = new scratch.target({isStage:true,name:"Stage"}) //make a sprite that is the stage
+stage.json.costumes.push(costume1.json) //add the costume to the sprite
+project.json.targets.push(stage.json) //add the stage to the project
+let abc = project.addBroadcast("abc") //add broadcast
 
-var costume2 = new scratch.costume(fs.readFileSync("../costumes/cat.svg"))
-var sprite1 = new scratch.target({isStage:false,name:"Jim"})
+var costume2 = new scratch.costume(fs.readFileSync("../costumes/cat.svg")) //make a costume
+costume2.save(path.resolve("../dist")) //save the costume
+var sprite1 = new scratch.target({isStage:false,name:"Jim"}) //create a sprite named "Jim"
 
-var blocks = new scratch.blockChain()
-blocks.addBlock("event_whenflagclicked",{})
-blocks.addBlock("control_wait",{
-    inputs:{"DURATION": [
+//creates a chain of blocks
+var blocks = new scratch.blockChain() 
+// blocks.addBlock("event_whenflagclicked",{})
+blocks.addBlock("event_whenbroadcastreceived",{
+    fields:{
+        "BROADCAST_OPTION": [
+          "abc",
+          abc
+        ]
+      }
+})
+blocks.addBlock("looks_say",{
+    inputs:{"MESSAGE": [
         1,
         [
-            scratch.inputTypes.Number,
-            10
+            scratch.inputTypes.String,
+            "Hello this is from a broadcast!"
         ]
     ]}
 })
-sprite1.json.blocks = Object.assign(sprite1.json.blocks,blocks.json)
-
-sprite1.json.costumes.push(costume2.json)
-project.json.targets.push(sprite1.json)
-costume2.save(path.resolve("../dist"))
+sprite1.json.blocks = Object.assign(sprite1.json.blocks,blocks.json) //adds blocks to sprite
 
 
+var blocks2 = new scratch.blockChain() 
+blocks2.addBlock("event_whenflagclicked",{})
+blocks2.addBlock("event_broadcast",{
+    inputs:{"BROADCAST_INPUT": [
+        1,
+        [
+          scratch.inputTypes.Broadcast,
+          "abc",
+          abc
+        ]
+      ]}
+})
+sprite1.json.blocks = Object.assign(sprite1.json.blocks,blocks2.json) //adds blocks to sprite
 
+
+sprite1.json.costumes.push(costume2.json) //adds costume to sprite
+project.json.targets.push(sprite1.json) //adds sprite to project
+
+
+//Writes project.json to the dist folder
 fs.writeFileSync("../dist/project.json",JSON.stringify(project.json),"utf-8")
 
 

@@ -23,7 +23,7 @@ blocks.addBlock("control_wait",{
     inputs:{"DURATION": [
         1,
         [
-            scratch.inputTypes.PositiveInteger,
+            scratch.inputTypes.Number,
             10
         ]
     ]}

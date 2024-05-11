@@ -1,7 +1,7 @@
 dist/
 project.sb3
 ROM/
-
+debug_output/
 
 # Logs
 logs

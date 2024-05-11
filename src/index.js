@@ -2,11 +2,11 @@
 const path = require("path");
 const fs = require('fs');
 const scratch = require("./scratch.js");
+const util = require("./util.js");
 
-if(fs.existsSync("../dist"))fs.rmSync("../dist",{recursive:true})
-fs.mkdirSync("../dist")
+util.genFolder("../dist", true);
 
-var project = new scratch.project()
+var project = new scratch.project();
 
 var costume1 = new scratch.costume(fs.readFileSync("../costumes/backdrop.svg"))
 var backdrop = new scratch.target({isStage:true,name:"Stage"})

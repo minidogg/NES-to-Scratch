@@ -2,6 +2,19 @@ const genRanHex = size => [...Array(size)].map(() => Math.floor(Math.random() * 
 const fs = require("fs")
 const path = require("path")
 
+const inputTypes = {
+    Number:4,
+    PositiveNumber:5,
+    PositiveInteger:6,
+    Integer:7,
+    Angle:8,
+    Color:9,
+    String:10,
+    Broadcast:11,
+    Variable:12,
+    List:13
+}
+
 let blockId = 0
 const genBlockId = ()=>{
     blockId++
@@ -135,4 +148,4 @@ class blockChain{
     }
 }
 
-module.exports = {project,target,costume,block,blockChain}
+module.exports = {project,target,costume,block,blockChain,inputTypes}

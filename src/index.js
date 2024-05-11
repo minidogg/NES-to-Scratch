@@ -19,8 +19,15 @@ var sprite1 = new scratch.target({isStage:false,name:"Jim"})
 
 var blocks = new scratch.blockChain()
 blocks.addBlock("event_whenflagclicked",{})
-blocks.addBlock("control_forever",{})
-blocks.addBlock("motion_ifonedgebounce",{})
+blocks.addBlock("control_wait",{
+    inputs:{"DURATION": [
+        1,
+        [
+            scratch.inputTypes.PositiveInteger,
+            10
+        ]
+    ]}
+})
 sprite1.json.blocks = Object.assign(sprite1.json.blocks,blocks.json)
 
 sprite1.json.costumes.push(costume2.json)

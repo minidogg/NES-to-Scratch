@@ -12,6 +12,7 @@ class project{
         }}
     }
 }
+
 let layer = 0
 class target{
     constructor(options={}){
@@ -53,6 +54,7 @@ class target{
         }
     }
 }
+
 class costume{
     constructor(data,options={}){
         this.data = data

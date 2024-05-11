@@ -16,9 +16,17 @@ costume1.save(path.resolve("../dist"))
 
 var costume2 = new scratch.costume(fs.readFileSync("../costumes/cat.svg"))
 var sprite1 = new scratch.target({isStage:false,name:"Jim"})
+
+var blocks = new scratch.blockChain()
+blocks.addBlock("event_whenflagclicked",{})
+blocks.addBlock("control_forever",{})
+blocks.addBlock("motion_ifonedgebounce",{})
+sprite1.json.blocks = Object.assign(sprite1.json.blocks,blocks.json)
+
 sprite1.json.costumes.push(costume2.json)
 project.json.targets.push(sprite1.json)
 costume2.save(path.resolve("../dist"))
+
 
 
 fs.writeFileSync("../dist/project.json",JSON.stringify(project.json),"utf-8")

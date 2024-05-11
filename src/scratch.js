@@ -2,6 +2,12 @@ const genRanHex = size => [...Array(size)].map(() => Math.floor(Math.random() * 
 const fs = require("fs")
 const path = require("path")
 
+let blockId = 0
+const genBlockId = ()=>{
+    blockId++
+    return blockId.toString()
+}
+
 class project{
     constructor(options={}){
 
@@ -78,4 +84,55 @@ class costume{
     }
 }
 
-module.exports = {project,target,costume}
+class block{
+    constructor(options={}){
+        this.id = genBlockId()
+        this.json = {
+            "opcode": "motion_ifonedgebounce",
+            "next": null,
+            "parent": null,
+            "inputs": {
+                // "MESSAGE": [
+                //     1,
+                //     [
+                //         10,
+                //         "Hello!"
+                //     ]
+                // ]
+            },
+            "fields": {},
+            "shadow": false,
+            "topLevel": true
+        }
+        Object.keys(options).forEach(key=>{
+            this.json[key] = options[key]
+        })
+        if(this.json.topLevel==true){
+            this.json.x = 0
+            this.json.y = 0
+        }
+    }
+}
+
+class blockChain{
+    constructor(options={}){
+        this.json = {}
+        this.lastBlockId = null
+    }
+    addBlock(opcode,options={}){
+        
+        if(this.lastBlockId!=null){
+            options.topLevel = false
+            options.parent = this.lastBlockId
+        }
+        let blockItem = new block(options)
+        if(this.lastBlockId!=null){
+            this.json[this.lastBlockId].next = blockItem.id
+        }
+        blockItem.json.opcode = opcode
+        this.json[blockItem.id] = blockItem.json
+        this.lastBlockId = blockItem.id
+    }
+}
+
+module.exports = {project,target,costume,block,blockChain}

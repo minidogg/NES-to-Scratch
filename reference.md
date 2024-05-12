@@ -4,6 +4,6 @@ https://github.com/scratchfoundation/scratch-vm/blob/e5950c3de5adb4859befc6fe1b1
 
 https://en.scratch-wiki.info/wiki/List_of_Block_Opcodes#Looks_Blocks
 
-https://www.masswerk.at/6502/6502_instruction_set.html#BRK
+https://www.masswerk.at/6502/6502_instruction_set.html
 
 https://www.nesdev.org/NESDoc.pdf

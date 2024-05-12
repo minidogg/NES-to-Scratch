@@ -22,3 +22,5 @@ module.exports.genFolder = function (location, erase_if_exists) {
     }
     return location;
 }
+
+module.exports.formatToHex=(num,bytes=1)=>(bytes==1?"$":"0x")+num.toString(16).padStart(1<<bytes,'0').toUpperCase();

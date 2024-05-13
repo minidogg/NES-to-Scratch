@@ -10,13 +10,6 @@ const files = fs.readdirSync(util.genFolder("../ROM", false), {withFileTypes: tr
               .filter(item => item.isFile())
               .filter(item => item.name.endsWith(".bin") || item.name.endsWith(".a26"));
 
-const mirroringModes = Object.freeze({
-    HORIZONTAL: Symbol("horizontal"),
-    VERTICAL: Symbol("vertical"),
-    FOUR_SCREEN: Symbol("four screen")
-});
-module.exports.mirroringModes = mirroringModes;
-
 async function load() {
     if (files.length < 1) {
         console.error("ERROR: no ROMs detected! Make sure your ROM file is of type *.bin or *.a26");
@@ -59,7 +52,7 @@ module.exports.preprocess_load = async (debug_output) => {
     } else {
         console.log("Loading succeeded successfully!");
         fs.writeFileSync(debug_output + "/" + "preprocessing.json", 
-                         JSON.stringify(data));
+                         JSON.stringify(data, null, 2));
     }
     return data;
 };

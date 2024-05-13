@@ -6,4 +6,4 @@ https://en.scratch-wiki.info/wiki/List_of_Block_Opcodes#Looks_Blocks
 
 https://www.masswerk.at/6502/6502_instruction_set.html
 
-https://www.nesdev.org/NESDoc.pdf
+https://problemkaputt.de/2k6specs.htm#memoryandiomap

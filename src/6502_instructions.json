@@ -497,7 +497,7 @@
       "opcode" : "$4C"
    },
    {
-      "mode" : "Indirect ",
+      "mode" : "Indirect",
       "opcode" : "$6C",
       "name" : "JMP",
       "description" : "Jump",
